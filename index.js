@@ -35,7 +35,7 @@ app.use(cors())
   })
 
 
-  app.post('/api/notes', (req, res, next) => {
+  app.post('/api/notes', (request, response, next) => {
     const body = req.body
     if(!body.content){
       return res.status(400).json({
