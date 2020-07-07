@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 app.use(express.json())
+app.use(express.static('part1/build'))
 app.use(cors())
 
 let notes = [
