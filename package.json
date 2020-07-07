@@ -8,7 +8,13 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build:ui:unix": "rm -rf build && cd ./part1 && npm run build --prod && cp -r build ../",
+    "build:ui:windows": "rmdir build /s /q && cd ./part1 && npm run build && xcopy build ..\\build /s /e /y /i",
+    "deploy": "git push heroku master",
+    "deploy:full:unix": "npm run build:ui:unix && git add . && git commit -m uibuild && npm run deploy",
+    "deploy:full:windows": "npm run build:ui:windows && git add . && git commit -m uibuild && npm run deploy",
+    "logs:prod": "heroku logs --tail"
   },
   "author": "tianyu",
   "license": "MIT",
