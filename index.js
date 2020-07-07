@@ -36,7 +36,7 @@ app.use(cors())
 
 
   app.post('/api/notes', (request, response, next) => {
-    const body = req.body
+    const body = request.body
     if(!body.content){
       return res.status(400).json({
         error: 'content missing'
