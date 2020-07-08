@@ -7,24 +7,31 @@
     "node": "12.x"
   },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "build:ui:unix": "rm -rf build && cd ./part1 && npm run build --prod && cp -r build ../",
     "build:ui:windows": "rmdir build /s /q && cd ./part1 && npm run build && xcopy build ..\\build /s /e /y /i",
     "deploy": "git push heroku master",
     "deploy:full:unix": "npm run build:ui:unix && git add . && git commit -m uibuild && npm run deploy",
     "deploy:full:windows": "npm run build:ui:windows && git add . && git commit -m uibuild && npm run deploy",
-    "logs:prod": "heroku logs --tail"
+    "logs:prod": "heroku logs --tail",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "author": "tianyu",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.22"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "eslint": "^7.4.0",
+    "jest": "^26.1.0",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
   }
 }
